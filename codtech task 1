@@ -1,0 +1,26 @@
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+# Load the dataset
+data = pd.read_csv('data.csv')
+
+# 1. Handling Missing Values (if any)
+#   - Example: Impute missing values with mean/median/mode
+#   data.fillna(data['Salary'].mean(), inplace=True) 
+
+# 2. Encoding Categorical Variables
+le = LabelEncoder()
+data['Gender'] = le.fit_transform(data['Gender']) 
+data['Purchased'] = le.fit_transform(data['Purchased'])
+
+# 3. Feature Scaling
+scaler = StandardScaler()
+data[['Age', 'Salary']] = scaler.fit_transform(data[['Age', 'Salary']])
+
+# 4. Splitting Data (if applicable)
+#   - Example: Split into training and testing sets
+#   from sklearn.model_selection import train_test_split
+#   X = data[['Age', 'Gender', 'Salary']] 
+#   y = data['Purchased']
+#   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+print(data.head())
